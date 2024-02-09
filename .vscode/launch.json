@@ -1,0 +1,74 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "ruby-debug",
+            "request": "launch",
+            "name": "RSpec LocalFile",
+            "program": "rspec",
+        
+            "programArgs": [
+                "${workspaceFolder}/bosh/src/bosh-director/"
+            ],
+            "useBundler": true
+        },
+        {
+            "name": "Debug Unit Tests",
+            "type": "Ruby",
+            "request": "launch",
+            "program": "/usr/local/bundle/bin/bundle",
+            "cwd": "${workspaceRoot}/bosh/src/bosh-director/",
+            "args": [
+                "exec",
+                "rspec",
+                "spec/unit/disk_manager_spec.rb",
+                "--format",
+                "documentation",
+                "--profile"
+            ],
+            "env": {
+                "AZURE_STORAGE_ACCOUNT": "foo",
+                "AZURE_STORAGE_ACCESS_KEY": "YmFyCg=="
+            }
+        },
+        {
+            "type": "ruby_lsp",
+            "request": "launch",
+            "name": "Debug program",
+            "program": "ruby "
+        },
+        {
+            "type": "ruby-debug",
+            "request": "launch",
+            "name": "RSpec",
+            "program": "bundle",
+            "programArgs": [
+                "exec",
+                "rspec",
+                "-I",
+                "${workspaceRoot}/bosh/src/bosh-director/",
+                "${workspaceFolder}/bosh/src/bosh-director/spec/unit/disk_manager_spec.rb"
+            ],
+            "useBundler": false
+        },
+        {
+            "type": "rdbg",
+            "name": "Run rake test",
+            "request": "launch",
+            "command": "bundle",
+            "script": "exec", // launch rake test with debugger
+            "cwd": "${workspaceRoot}/bosh/src/bosh-director/",
+            "args": [
+                "rspec",
+                "spec/unit/disk_manager_spec.rb",
+                "--format",
+                "documentation",
+                "--profile"
+            ],
+            "askParameters": false // Do not ask startup parameter any more
+        }
+    ]
+}
